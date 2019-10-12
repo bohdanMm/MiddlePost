@@ -15,7 +15,7 @@ public class StatusResponce {
 
     public StatusResponce(Status status){
         this.id = status.getId();
-        this.statusName = status.getStatusName().name();
+        this.statusName = status.getStatusName();
     }
 
 }

@@ -39,7 +39,7 @@ public class PackageResponce {
         this.locationTo = pac.getLocationTo();
         this.customerFrom = pac.getCustomerFrom();
         this.customerTo = pac.getCustomerTo();
-        this.statusName = pac.getStatus().getStatusName().name();
+        this.statusName = pac.getStatus().getStatusName();
     }
 
 }

@@ -1,11 +1,10 @@
 package kindgeek.middlepost.controller;
 
+import kindgeek.middlepost.dto.request.StatusRequest;
 import kindgeek.middlepost.service.StatusService;
 import kindgeek.middlepost.dto.responce.StatusResponce;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,9 +21,24 @@ public class StatusController {
         return statusService.getAllAdresses();
     }
 
-    @RequestMapping("/save")
-    public void insertStatuses(){
-        statusService.save();
+    @RequestMapping("/{id}")
+    public void getById(@PathVariable Long id){
+        statusService.getById(id);
+    }
+
+    @PostMapping
+    public void save(@RequestBody StatusRequest statusRequest){
+        statusService.save(statusRequest);
+    }
+
+    @PutMapping("/{id}")
+    public  void update(@PathVariable Long id, @RequestBody StatusRequest statusRequest){
+        statusService.update(id, statusRequest);
+    }
+
+    @DeleteMapping
+    public void  delete(@RequestParam Long id){
+        statusService.delete(id);
     }
 
 

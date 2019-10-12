@@ -1,30 +1,19 @@
 package kindgeek.middlepost.entityes;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
 public class Status extends IdHolder{
 
-    private Statuses statusName;
+    private String statusName;
 
     @OneToMany (mappedBy = "status")
-    private List<Package> aPackage;
-
-    public Statuses getStatusName() {
-        return statusName;
-    }
-
-    public void setStatusName(Statuses statusName) {
-        this.statusName = statusName;
-    }
-
-    public List<Package> getaPackage() {
-        return aPackage;
-    }
-
-    public void setaPackage(List<Package> aPackage) {
-        this.aPackage = aPackage;
-    }
+    private List<Package> packageList;
 }
