@@ -27,7 +27,7 @@ public class WorkerResponce {
         this.name = worker.getName();
         this.name = worker.getSurname();
         this.salary = worker.getSalary();
-        this.position = worker.getPosition().name();
+        this.position = worker.getPosition();
     }
 
 }

@@ -1,8 +1,13 @@
 package kindgeek.middlepost.entityes;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
+@Getter
+@Setter
 @Entity
 public class Customer extends IdHolder {
 
@@ -22,37 +27,5 @@ public class Customer extends IdHolder {
                 ", surname='" + surname + '\'' +
                 ", telephoneNumber='" + telephoneNumber + '\'' +
                 '}';
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getTelephoneNumber() {
-        return telephoneNumber;
-    }
-
-    public void setTelephoneNumber(String telephoneNumber) {
-        this.telephoneNumber = telephoneNumber;
-    }
-
-    public PasportData getPasportData() {
-        return pasportData;
-    }
-
-    public void setPasportData(PasportData pasportData) {
-        this.pasportData = pasportData;
     }
 }

@@ -16,14 +16,14 @@ public class StatusController {
     @Autowired
     StatusService statusService;
 
-    @RequestMapping
+    @GetMapping
     public List<StatusResponce> getStatuses(){
         return statusService.getAllAdresses();
     }
 
-    @RequestMapping("/{id}")
-    public void getById(@PathVariable Long id){
-        statusService.getById(id);
+    @GetMapping("/{id}")
+    public StatusResponce getById(@PathVariable Long id){
+        return statusService.getById(id);
     }
 
     @PostMapping

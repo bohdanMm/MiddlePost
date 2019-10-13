@@ -11,16 +11,14 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Locality extends IdHolder {
+public class Region extends IdHolder {
 
-    private String localityName;
-
-    @OneToMany(mappedBy = "locality")
-    private List<Adress> adress;
-
-    @ManyToOne
-    private Region region;
+    private String RegionName;
 
     @ManyToOne
     private District district;
+
+    @OneToMany(mappedBy = "region")
+    private List<Locality> localities;
+
 }
