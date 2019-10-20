@@ -1,11 +1,11 @@
 package kindgeek.middlepost.controller;
 
+import kindgeek.middlepost.dto.request.AdressRequest;
+import kindgeek.middlepost.dto.responce.DataResponce;
 import kindgeek.middlepost.service.AdressService;
 import kindgeek.middlepost.dto.responce.AdressResponce;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,11 +15,31 @@ import java.util.List;
 public class AdressController {
 
     @Autowired
-    AdressService adressService;
+    private AdressService adressService;
 
-    @RequestMapping("/all")
-    public List<AdressResponce> getAdresses(){
-        return adressService.getAllAdresses();
+    @GetMapping
+    public DataResponce<AdressResponce> getAll(@RequestParam Integer page, @RequestParam Integer size){
+        return adressService.getAll(page, size);
+    }
+
+    @GetMapping("/{id}")
+    public AdressResponce getAll(@PathVariable Long id){
+        return adressService.getById(id);
+    }
+
+    @PostMapping
+    public void save(@RequestBody AdressRequest adressRequest){
+        adressService.save(adressRequest);
+    }
+
+    @PutMapping("/{id}")
+    public void update(@PathVariable Long id, @RequestBody AdressRequest adressRequest){
+        adressService.update(id, adressRequest);
+    }
+
+    @DeleteMapping
+    public void delete(@RequestParam Long id){
+        adressService.delete(id);
     }
 
 }

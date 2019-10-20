@@ -11,11 +11,14 @@ import java.util.stream.Collectors;
 @Setter
 public class DistrictResponce {
 
+    private Long id;
+
     private String districtName;
 
     private List<RegionResponce> regions;
 
     public DistrictResponce(District district){
+        this.id = district.getId();
         this.districtName = district.getDistrictName();
         this.regions = district.getRegions()
                 .stream()

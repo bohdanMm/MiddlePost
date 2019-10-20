@@ -12,16 +12,21 @@ public class AdressResponce {
 
     private String street;
 
-    private int buildingNumber;
+    private Integer buildingNumber;
 
     private String localityName;
 
-    public AdressResponce(Adress adress)
-    {
+    private String regionName;
+
+    private String districtName;
+
+    public AdressResponce(Adress adress){
         this.id = adress.getId();
         this.street = adress.getStreet();
         this.buildingNumber = adress.getBuildingNumber();
         this.localityName = adress.getLocality().getLocalityName();
+        this.regionName = adress.getLocality().getRegion().getRegionName();
+        this.districtName = adress.getLocality().getDistrict().getDistrictName();
     }
 
 

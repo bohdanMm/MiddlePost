@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class StatusService {
 
     @Autowired
-    private StatusRepository statusRepository;
+    public StatusRepository statusRepository;
 
     public List<StatusResponce> getAllAdresses() {
         return statusRepository

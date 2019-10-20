@@ -14,12 +14,12 @@ public class Adress extends IdHolder {
 
     private String street;
 
-    private int buildingNumber;
+    private Integer buildingNumber;
 
     @ManyToOne
     private Locality locality;
 
-    @OneToOne
+    @OneToOne(mappedBy = "adress")
     private Location location;
 
 }

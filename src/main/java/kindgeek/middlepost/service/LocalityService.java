@@ -45,6 +45,7 @@ public class LocalityService {
     public void save(LocalityRequest localityRequest){
         Locality locality = new Locality();
         locality.setLocalityName(localityRequest.getLocalityName());
+        locality.setRegion(regionService.getRegionEntityByID(localityRequest.getRegionId()));
         locality.setDistrict(districtService.getDistrictEntityById(localityRequest.getDistrictId()));
         localityRepository.save(locality);
     }
@@ -52,6 +53,8 @@ public class LocalityService {
     public void update(Long id, LocalityRequest localityRequest){
         Locality locality = getLocalityEntityById(id);
         locality.setLocalityName(localityRequest.getLocalityName());
+        locality.setRegion(regionService.getRegionEntityByID(localityRequest.getRegionId()));
+        locality.setDistrict(districtService.getDistrictEntityById(localityRequest.getDistrictId()));
         localityRepository.save(locality);
     }
 

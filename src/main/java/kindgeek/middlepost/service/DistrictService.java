@@ -1,11 +1,15 @@
 package kindgeek.middlepost.service;
 
 import kindgeek.middlepost.dto.request.DistrictRequest;
+import kindgeek.middlepost.dto.responce.DataResponce;
 import kindgeek.middlepost.dto.responce.DistrictResponce;
 import kindgeek.middlepost.entityes.District;
 import kindgeek.middlepost.exeptions.WrongInputDataExeption;
 import kindgeek.middlepost.repository.DistrictRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -25,12 +29,22 @@ public class DistrictService {
                 .orElseThrow(()->new WrongInputDataExeption("There no district with id: "+ id));
     }
 
-    public List<DistrictResponce> getAllDistricts(){
-        return districtRepository
-                .findAll()
+    public DataResponce<DistrictResponce> getAllDistricts(Integer page, Integer size,
+                                                  String sortBy, Sort.Direction direction,
+                                                  String name){
+        Sort sort = Sort.by(direction, sortBy);
+        PageRequest pageRequest = PageRequest.of(page, size, sort);
+        Page<District> districtPage;
+        if(name != null){
+            districtPage = districtRepository.findAllByDistrictNameLike("%" + name + "%", pageRequest);
+        } else {
+            districtPage = districtRepository.findAll(pageRequest);
+        }
+        return new DataResponce<DistrictResponce>(districtPage.getContent()
                 .stream()
                 .map(DistrictResponce::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList())
+                , districtPage);
     }
 
     public DistrictResponce getById(Long id){

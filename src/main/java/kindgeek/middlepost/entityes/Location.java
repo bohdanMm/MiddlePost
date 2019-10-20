@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 public class Location extends  IdHolder {
 
-    @OneToOne (mappedBy = "location")
+    @OneToOne
     private Adress adress;
 
     @OneToMany (mappedBy = "location")

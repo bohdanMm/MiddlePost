@@ -1,9 +1,11 @@
 package kindgeek.middlepost.controller;
 
 import kindgeek.middlepost.dto.request.DistrictRequest;
+import kindgeek.middlepost.dto.responce.DataResponce;
 import kindgeek.middlepost.dto.responce.DistrictResponce;
 import kindgeek.middlepost.service.DistrictService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +19,12 @@ public class DistrictController {
     private DistrictService districtService;
 
     @GetMapping
-    public List<DistrictResponce> getAll(){
-        return districtService.getAllDistricts();
+    public DataResponce<DistrictResponce> getAll(@RequestParam Integer page, @RequestParam Integer size,
+                                                 @RequestParam String sortBy, @RequestParam Sort.Direction direction,
+                                                 @RequestParam(required = false) String name){
+        return districtService.getAllDistricts(page, size,
+                                                sortBy, direction,
+                                                name);
     }
 
     @GetMapping("/{id}")

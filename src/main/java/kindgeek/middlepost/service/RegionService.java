@@ -22,7 +22,7 @@ public class RegionService {
     @Autowired
     private DistrictService districtService;
 
-    private Region getRegionEntityByID(Long id){
+    public Region getRegionEntityByID(Long id){
         return regionRepository.findById(id)
                 .orElseThrow(()->new WrongInputDataExeption("There are not region with id: " + id));
     }

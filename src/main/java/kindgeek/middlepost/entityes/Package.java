@@ -13,7 +13,7 @@ import java.util.Date;
 @Entity
 public class Package extends IdHolder {
 
-    private Integer weight;
+    private Double weight;
 
     private Date sandDate;
 
