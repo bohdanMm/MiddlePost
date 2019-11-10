@@ -1,6 +1,8 @@
 package kindgeek.middlepost.controller;
 
+import kindgeek.middlepost.dto.request.CustomerLogInRequest;
 import kindgeek.middlepost.dto.request.CustomerRequest;
+import kindgeek.middlepost.dto.responce.CustomerLogedInResponce;
 import kindgeek.middlepost.dto.responce.CustomerResponce;
 import kindgeek.middlepost.dto.responce.DataResponce;
 import kindgeek.middlepost.entityes.Customer;
@@ -31,8 +33,8 @@ public class CustomerController {
     }
 
     @PostMapping
-    public void save(@RequestBody CustomerRequest customerRequest){
-        customerService.save(customerRequest);
+    public CustomerResponce save(@RequestBody CustomerRequest customerRequest){
+        return customerService.save(customerRequest);
     }
 
     @PutMapping("/{id}")
@@ -43,5 +45,10 @@ public class CustomerController {
     @DeleteMapping
     public void delete(@RequestParam Long id){
         customerService.delete(id);
+    }
+
+    @PostMapping("/logIn")
+    public CustomerLogedInResponce logIn(@RequestBody CustomerLogInRequest customerLogInRequest){
+        return customerService.logIn(customerLogInRequest);
     }
 }

@@ -1,11 +1,15 @@
 package kindgeek.middlepost.service;
 
 import kindgeek.middlepost.dto.request.PackageRequest;
+import kindgeek.middlepost.dto.responce.DataResponce;
 import kindgeek.middlepost.dto.responce.PackageResponce;
 import kindgeek.middlepost.entityes.Package;
 import kindgeek.middlepost.exeptions.WrongInputDataExeption;
 import kindgeek.middlepost.repository.PackageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -33,12 +37,13 @@ public class PackageService {
                 .orElseThrow(()-> new WrongInputDataExeption("There are not Package with id:" + id));
     }
 
-    public List<PackageResponce> getAll(){
-        return packageRepository
-                .findAll()
-                .stream()
+    public DataResponce<PackageResponce> getAll(Integer page, Integer size){
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<Package> packagePage = packageRepository.findAll(pageRequest);
+        return new DataResponce<>(packagePage.getContent().stream()
                 .map(PackageResponce::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()),
+                packagePage);
     }
 
     public PackageResponce getById(Long id){

@@ -7,8 +7,11 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
-public class LocationRequest {
+public class CustomerLogInRequest {
 
     @NotBlank
-    private Long adressId;
+    private String email;
+
+    @NotBlank
+    private String password;
 }

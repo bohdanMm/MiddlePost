@@ -17,8 +17,12 @@ public class Customer extends IdHolder {
 
     private  String telephoneNumber;
 
-    @OneToOne
-    private PasportData pasportData;
+    private String email;
+
+    private String password;
+
+    private String pasportData;
+
 
     @Override
     public String toString() {

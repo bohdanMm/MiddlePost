@@ -1,22 +1,20 @@
 package kindgeek.middlepost.service;
 
+import kindgeek.middlepost.dto.request.CustomerLogInRequest;
 import kindgeek.middlepost.dto.request.CustomerRequest;
-import kindgeek.middlepost.dto.request.PasportDataReqest;
+import kindgeek.middlepost.dto.responce.CustomerLogedInResponce;
 import kindgeek.middlepost.dto.responce.CustomerResponce;
 import kindgeek.middlepost.dto.responce.DataResponce;
-import kindgeek.middlepost.dto.responce.PasportDataResponce;
 import kindgeek.middlepost.entityes.Customer;
-import kindgeek.middlepost.entityes.PasportData;
+
 import kindgeek.middlepost.exeptions.WrongInputDataExeption;
 import kindgeek.middlepost.repository.CustomerRepository;
-import kindgeek.middlepost.repository.PasportDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,9 +22,6 @@ public class CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
-
-    @Autowired
-    public PasportDataRepository pasportDataRepository;
 
     public Customer getCustomerEntityById(Long id){
         return customerRepository.findById(id)
@@ -49,12 +44,15 @@ public class CustomerService {
         return new CustomerResponce(getCustomerEntityById(id));
     }
 
-    public void save(CustomerRequest customerRequest){
+    public CustomerResponce save(CustomerRequest customerRequest){
         Customer customer = new Customer();
         customer.setName(customerRequest.getName());
         customer.setSurname(customerRequest.getSurname());
         customer.setTelephoneNumber(customerRequest.getTelephoneNumber());
-        customerRepository.save(customer);
+        customer.setPasportData(customerRequest.getPasportData());
+        customer.setPassword(customerRequest.getPassword());
+        customer.setEmail(customerRequest.getEmail());
+        return new CustomerResponce(customerRepository.save(customer));
     }
 
     public void update(Long id, CustomerRequest customerRequest){
@@ -62,20 +60,23 @@ public class CustomerService {
         customer.setName(customerRequest.getName());
         customer.setSurname(customerRequest.getSurname());
         customer.setTelephoneNumber(customerRequest.getTelephoneNumber());
-        customer.setPasportData(pasportDataRepository.findById(customerRequest.getPasportDataId())
-                .orElseThrow(()-> new WrongInputDataExeption("There are not pasport data with id: "
-                        + customerRequest.getPasportDataId())));
+        customer.setPasportData(customerRequest.getPasportData());
+        customer.setPassword(customerRequest.getPassword());
+        customer.setEmail(customerRequest.getEmail());
         customerRepository.save(customer);
     }
 
     public void delete(Long id){
         Customer customer = getCustomerEntityById(id);
         if (customer.getPasportData() != null){
-            pasportDataRepository.delete(customer.getPasportData());
             customerRepository.delete(customer);
         } else {
             customerRepository.delete(customer);
         }
+    }
+
+    public CustomerLogedInResponce logIn(CustomerLogInRequest request){
+        return new CustomerLogedInResponce(customerRepository.findByEmailAndPassword(request.getEmail(), request.getPassword()));
     }
 
 }

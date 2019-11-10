@@ -1,9 +1,11 @@
 package kindgeek.middlepost.controller;
 
 import kindgeek.middlepost.dto.request.LocalityRequest;
+import kindgeek.middlepost.dto.responce.DataResponce;
 import kindgeek.middlepost.dto.responce.LocalityResponce;
 import kindgeek.middlepost.service.LocalityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +19,9 @@ public class LocalityController {
     private LocalityService localityService;
 
     @GetMapping
-    public List<LocalityResponce> getAll(){
-        return localityService.getAll();
+    public DataResponce<LocalityResponce> getAll(@RequestParam Integer page, @RequestParam Integer size,
+                                                 @RequestParam String sortBy, @RequestParam Sort.Direction direction){
+        return localityService.getAll(page, size, sortBy, direction);
     }
 
     @GetMapping("/{id}")

@@ -18,7 +18,7 @@ public class StatusController {
 
     @GetMapping
     public List<StatusResponce> getStatuses(){
-        return statusService.getAllAdresses();
+        return statusService.getAll();
     }
 
     @GetMapping("/{id}")

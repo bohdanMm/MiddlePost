@@ -1,0 +1,26 @@
+#header{
+    background-color: rgb(89, 175, 250);
+    border: solid rgb(0, 69, 129) 3px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;   
+}
+
+#references{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.refs{
+    text-decoration: none;
+    padding-right: 45px;
+    font-size: 20px;
+    color: brown;
+}
+
+#icon{
+    height: 45px;
+    padding: 6px;
+    padding-left: 20px;
+}

@@ -1,8 +1,10 @@
 package kindgeek.middlepost.controller;
 
 import kindgeek.middlepost.dto.request.WorkerRequest;
+import kindgeek.middlepost.dto.responce.DataResponce;
 import kindgeek.middlepost.dto.responce.WorkerResponce;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,8 +18,9 @@ public class WorkerController {
     private WorkerController workerController;
 
     @GetMapping
-    public List<WorkerResponce> getAll(){
-        return workerController.getAll();
+    public DataResponce<WorkerResponce> getAll(@RequestParam Integer page, @RequestParam Integer size,
+                                               @RequestParam String sortBy, @RequestParam Sort.Direction direction){
+        return workerController.getAll(page, size, sortBy, direction);
     }
 
     @GetMapping("/{id}")

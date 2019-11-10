@@ -5,8 +5,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PasportDataReqest {
-    private String serialNumber;
+public class FilterWorkerRequest {
 
-    private String code;
+    private Integer salaryFrom;
+
+    private Integer salaryTo;
+
 }

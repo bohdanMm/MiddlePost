@@ -1,6 +1,7 @@
 package kindgeek.middlepost.controller;
 
 import kindgeek.middlepost.dto.request.PackageRequest;
+import kindgeek.middlepost.dto.responce.DataResponce;
 import kindgeek.middlepost.dto.responce.PackageResponce;
 import kindgeek.middlepost.service.PackageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ public class PackageController {
     private PackageService packageService;
 
     @GetMapping
-    public List<PackageResponce> getAll(){
-        return packageService.getAll();
+    public DataResponce<PackageResponce> getAll(@RequestParam Integer page, @RequestParam Integer size ){
+        return packageService.getAll(page, size);
     }
 
     @GetMapping("/{id}")

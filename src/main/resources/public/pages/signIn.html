@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign In</title>
+    <link rel="stylesheet" type="text/css" href="../styles/signIn.css">
+    <link rel="stylesheet" type="text/css" href="../styles/header.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <div id="header">
+        <img src="../images/sign.png" id="icon" alt="">
+        <div id="references">
+            
+        </div>
+    </div>
+    <div id="logIn">
+        <form id="LogInForm">
+            <div class="align">
+                <label for="email">Surname:</label>
+                <input type="email" name="email">
+            </div class="align">
+            <div class="align">
+                <label for="password">Password:</label>
+                <input type="password" name="pass">
+            </div>
+            <button onclick="login()">Sign in</button>
+        </form>
+    </div>
+</body>
+<script src="../scripts/signIn.js"></script>
+
+</html>

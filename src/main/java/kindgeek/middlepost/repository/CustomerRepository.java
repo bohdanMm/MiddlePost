@@ -1,7 +1,6 @@
 package kindgeek.middlepost.repository;
 
 import kindgeek.middlepost.entityes.Customer;
-import kindgeek.middlepost.entityes.PasportData;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +13,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     public  Customer findByTelephoneNumber(String telephoneNumber);
 
-    public Customer findByPasportData(PasportData pasportData);
+    public Customer findByPasportData(String pasportData);
+
+    public Customer findByEmailAndPassword(String email, String password);
 
 }

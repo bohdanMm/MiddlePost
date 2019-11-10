@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="../styles/signUp.css">
+    <link rel="stylesheet" type="text/css" href="../styles/header.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="header">
+        <img src="../images/sign.png" id="icon" alt="">
+        <div id="references">
+            <a href="signIn.html" class="refs">Sign in</a>
+            <a href="signUp.html" class="refs">Sign up</a>
+        </div>
+    </div>
+    <div id="registration">
+        <form id="registrationForm">
+            <div id="surnameCont" class="align">
+                <label for="surname">Surname:</label>
+                <input type="text" name="surname" id="surname" required="required">
+            </div>
+            <div id="nameCont" class="align">
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" required="required">
+            </div>
+            <div id="telNumberCon" class="align">
+                <label for="telephoneNumber">Phone number:</label>
+                <input type="text" name="telephoneNumber" id="phoneNumber" required="required">
+            </div>
+            <div id="emailCont" class="align">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" required="required">
+            </div>
+            <div id="pasportDataCont" class="align">
+                <label for="pasportData">Pasport data:</label>
+                <input type="text" name="pasportData" id="pasportData" required="required"> </div>
+            <div id="passCont" class="align">
+                <label for="pass">Password:</label>
+                <input type="password" name="pass" id="pass" required="required">
+            </div>
+            <div id="confPassCont" class="align">
+                <label for="confirmPass">Confirm password:</label>
+                <input type="password" name="confirmPass" required="required">
+            </div>
+            <button onclick="return validate();">Send</button>
+        </form>
+    </div>
+</body>
+<script src="../scripts/signUp.js"></script>
+
+</html>

@@ -17,7 +17,7 @@ public class StatusService {
     @Autowired
     public StatusRepository statusRepository;
 
-    public List<StatusResponce> getAllAdresses() {
+    public List<StatusResponce> getAll() {
         return statusRepository
                 .findAll()
                 .stream()

@@ -1,6 +1,7 @@
 package kindgeek.middlepost.controller;
 
 import kindgeek.middlepost.dto.request.LocationRequest;
+import kindgeek.middlepost.dto.responce.DataResponce;
 import kindgeek.middlepost.dto.responce.LocationResponce;
 import kindgeek.middlepost.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ public class LocationController {
     private LocationService locationService;
 
     @GetMapping
-    public List<LocationResponce> getAll(){
-        return locationService.getAll();
+    public DataResponce<LocationResponce> getAll(@RequestParam Integer page, @RequestParam Integer size){
+        return locationService.getAll(page, size);
     }
 
     @GetMapping("/{id}")
