@@ -44,7 +44,7 @@ public class CustomerService {
         return new CustomerResponce(getCustomerEntityById(id));
     }
 
-    public CustomerResponce save(CustomerRequest customerRequest){
+    public CustomerLogedInResponce save(CustomerRequest customerRequest){
         Customer customer = new Customer();
         customer.setName(customerRequest.getName());
         customer.setSurname(customerRequest.getSurname());
@@ -52,7 +52,8 @@ public class CustomerService {
         customer.setPasportData(customerRequest.getPasportData());
         customer.setPassword(customerRequest.getPassword());
         customer.setEmail(customerRequest.getEmail());
-        return new CustomerResponce(customerRepository.save(customer));
+        customerRepository.save(customer);
+        return new CustomerLogedInResponce(customer);
     }
 
     public void update(Long id, CustomerRequest customerRequest){
@@ -76,7 +77,9 @@ public class CustomerService {
     }
 
     public CustomerLogedInResponce logIn(CustomerLogInRequest request){
-        return new CustomerLogedInResponce(customerRepository.findByEmailAndPassword(request.getEmail(), request.getPassword()));
+        System.out.println(request.getEmail() + request.getPassword());
+        Customer customer = customerRepository.findByEmailAndPassword(request.getEmail(), request.getPassword());
+        return new CustomerLogedInResponce(customer);
     }
 
 }

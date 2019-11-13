@@ -33,7 +33,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public CustomerResponce save(@RequestBody CustomerRequest customerRequest){
+    public CustomerLogedInResponce save(@RequestBody CustomerRequest customerRequest){
         return customerService.save(customerRequest);
     }
 

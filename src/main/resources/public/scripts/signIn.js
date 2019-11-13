@@ -11,10 +11,9 @@ function login() {
 
     var customerForLogIn = {
         email: $('#email').val(),
-        password: $('#pasportData').val()
+        password: $('#pass').val()
     };
 
-    var needGo = false;
     $.ajax({
         url: basicURL + "/customer/logIn",
         type: "POST",
@@ -22,10 +21,12 @@ function login() {
         contentType: "application/json",
         data: JSON.stringify(customerForLogIn)
     })
-        .done(function (data) {
+        .done(function (response) {
+            sessionStorage.setItem('currentCustomer', JSON.stringify(response));
             window.location.href = '../index.html';
         })
         .fail(function (e) {
+            sessionStorage.clear();
             alert("ERROR:\n" + e.responseJSON.errors[0].defaultMessage);
         })
 }
