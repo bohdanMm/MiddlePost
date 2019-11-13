@@ -36,11 +36,14 @@ function validate() {
         data: JSON.stringify(customerForSave)
     })
         .done(function (response) {
+            alert(JSON.stringify(response));
             sessionStorage.setItem('currentCustomer', JSON.stringify(response));
             window.location.href = '../index.html';
         })
         .fail(function (e) {
+            console.log(errors);
+            alert(JSON.parse(sessionStorage.getItem('currentCustomer')).name);
             sessionStorage.clear();
             alert("ERROR:\n" + e.responseJSON.errors[0].defaultMessage);
-        })
+        });
 }

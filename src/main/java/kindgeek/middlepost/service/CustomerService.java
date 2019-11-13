@@ -77,9 +77,14 @@ public class CustomerService {
     }
 
     public CustomerLogedInResponce logIn(CustomerLogInRequest request){
-        System.out.println(request.getEmail() + request.getPassword());
         Customer customer = customerRepository.findByEmailAndPassword(request.getEmail(), request.getPassword());
-        return new CustomerLogedInResponce(customer);
+        if (customer != null){
+            return new CustomerLogedInResponce(customer);
+        }
+        else {
+            throw new WrongInputDataExeption("Ther are not registred customer with email: " +
+                    request.getEmail() + " and so password.");
+        }
     }
 
 }

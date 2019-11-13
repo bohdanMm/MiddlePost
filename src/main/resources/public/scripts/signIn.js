@@ -1,6 +1,6 @@
 var basicURL = "http://localhost:8080";
 
-document.getElementById('icon').addEventListener('click', function(){
+document.getElementById('icon').addEventListener('click', function () {
     window.location.href = '../index.html';
 });
 
@@ -27,6 +27,6 @@ function login() {
         })
         .fail(function (e) {
             sessionStorage.clear();
-            alert("ERROR:\n" + e.responseJSON.errors[0].defaultMessage);
+            alert("ERROR:\n" + e.responseJSON.message);
         })
 }
