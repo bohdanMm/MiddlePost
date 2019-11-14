@@ -11,4 +11,7 @@ public class LocationRequest {
 
     @NotBlank
     private Long adressId;
+
+    @NotBlank
+    private Integer number;
 }

@@ -27,9 +27,14 @@ public class PackageResponce {
 
     private String statusName;
 
-    private Long locationFromNumber;
+    private String locationFromStreet;
+    private String locationToStreet;
 
-    private Long locationToNumber;
+    private Integer buildingFromNumber;
+    private Integer buildingToNumber;
+
+    private String localityFromName;
+    private String localityToName;
 
     public PackageResponce(Package pac){
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -44,6 +49,12 @@ public class PackageResponce {
         this.statusName = pac.getStatus().getStatusName();
         this.customerFromId = pac.getCustomerFrom().getId();
         this.customerToId = pac.getCustomerTo().getId();
+        this.locationFromStreet = pac.getLocationFrom().getAdress().getStreet();
+        this.locationToStreet = pac.getLocationTo().getAdress().getStreet();
+        this.buildingFromNumber = pac.getLocationFrom().getAdress().getBuildingNumber();
+        this.buildingToNumber = pac.getLocationTo().getAdress().getBuildingNumber();
+        this.localityFromName = pac.getLocationFrom().getAdress().getLocality().getLocalityName();
+        this.localityToName = pac.getLocationTo().getAdress().getLocality().getLocalityName();;
     }
 
 }

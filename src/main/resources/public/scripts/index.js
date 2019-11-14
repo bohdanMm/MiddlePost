@@ -7,12 +7,31 @@ function checkLogIn() {
     if (sessionStorage.length == 0) {
         document.getElementById("references").innerHTML = '<a href="pages/signIn.html" class="refs">Sign in</a> <a href="pages/signUp.html" class="refs">Sign up</a>';
     } else {
-        document.getElementById('references').innerHTML = '<a href="pages/personalCabinet.html" class="refs">' +
-            JSON.parse(sessionStorage.getItem('currentCustomer')).name + '</a>'+
-            '<a href="#" id="exit" class="refs" onclick="exit()">Log out</a>';
+        var pageHref = document.createElement("a");
+        var href;
+        if(JSON.parse(sessionStorage.getItem('currentCustomer')).status == "admin"){
+            href = "pages/adminPage.html";
+        } else if(JSON.parse(sessionStorage.getItem('currentCustomer')).status == "worker") {
+            href = "pages/workerPage.html";
+        } else {
+            href = "pages/personalCabinet.html";
+        }
+        pageHref.href = href;
+        pageHref.className = "refs";
+        pageHref.innerHTML = JSON.parse(sessionStorage.getItem('currentCustomer')).name;
+        console.log(pageHref);
+        var refrences =  document.getElementById('references');
+        refrences.appendChild(pageHref);
+        var exit = document.createElement("a");
+        exit.className = "refs";
+        exit.href="#";
+        exit.addEventListener("click", logOut);
+        exit.innerHTML = "Log out";
+        refrences.appendChild(exit);
     }
 }
-function exit(){
+
+function logOut(){
     sessionStorage.clear();
     window.location.href = '../index.html';
 }

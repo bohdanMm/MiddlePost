@@ -14,9 +14,20 @@ public class CustomerLogedInResponce {
 
     private String email;
 
+    private String status;
+
     public CustomerLogedInResponce(Customer customer) {
         this.name = customer.getName();
         this.surname = customer.getSurname();
         this.email = customer.getEmail();
+        String[] getStatus =  email.split("@");
+        String extantion = getStatus[getStatus.length -1];
+        if(extantion.equals("admin")){
+            status = "admin";
+        } else if(extantion.equals("worker")) {
+            status = "worker";
+        } else {
+            status = "customer";
+        }
     }
 }

@@ -16,15 +16,13 @@ public class LocationResponce {
 
     private Adress adress;
 
-    private List<WorkerResponce> worker;
+    private Integer number;
 
     public  LocationResponce(Location location)
     {
         this.id = location.getId();
         this.adress = location.getAdress();
-        this.worker = location.getWorker().stream()
-            .map(WorkerResponce::new)
-            .collect(Collectors.toList());
+        this.number = location.getNumber();
     }
 
 }

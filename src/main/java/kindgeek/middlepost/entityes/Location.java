@@ -15,6 +15,8 @@ public class Location extends  IdHolder {
     @OneToOne
     private Adress adress;
 
+    private Integer number;
+
     @OneToMany (mappedBy = "location")
     private List<Worker> worker;
 
