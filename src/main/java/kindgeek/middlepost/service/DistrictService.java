@@ -55,10 +55,11 @@ public class DistrictService {
         return new DistrictResponce(districtRepository.findByDistrictName(name));
     }
 
-    public void save(DistrictRequest districtRequest){
+    public DistrictResponce save(DistrictRequest districtRequest){
         District district = new District();
         district.setDistrictName(districtRequest.getDistrictName());
         districtRepository.save(district);
+        return new DistrictResponce(district);
     }
 
     public void update(Long id, DistrictRequest districtRequest){
@@ -67,10 +68,11 @@ public class DistrictService {
         districtRepository.save(district);
     }
 
-    public void delete(Long id){
+    public Boolean delete(Long id){
         District district = getDistrictEntityById(id);
         if(district.getRegions().isEmpty() && district.getLocalities().isEmpty()){
             districtRepository.delete(district);
+            return true;
         } else {
             throw new WrongInputDataExeption("District with id:" + id + " has regions or localities");
         }

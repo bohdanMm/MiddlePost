@@ -32,19 +32,19 @@ public class DistrictController {
         return districtService.getById(id);
     }
 
-    @PutMapping
-    public void save(@RequestBody DistrictRequest districtRequest){
-        districtService.save(districtRequest);
+    @PostMapping
+    public DistrictResponce save(@RequestBody DistrictRequest districtRequest){
+        return districtService.save(districtRequest);
     }
 
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     public void update(@PathVariable Long id, @RequestBody DistrictRequest districtRequest){
         districtService.update(id, districtRequest);
     }
 
     @DeleteMapping
-    public void delete(@RequestParam Long id){
-        districtService.delete(id);
+    public Boolean delete(@RequestParam Long id){
+        return districtService.delete(id);
     }
 
 }

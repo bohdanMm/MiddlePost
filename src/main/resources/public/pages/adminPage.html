@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../styles/admin.css">
     <link rel="stylesheet" type="text/css" href="../styles/header.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -36,51 +37,25 @@
             </select>
         </div>
 
-        <div class=" district">
-            <label for="distr">Config district</label>
-            <select id="distr">
-                <option value="addDistrict">Add district</option>
-                <option value="getAll">Get all</option>
-            </select>
-        </div>
-
-        <div class="region align">
-            <label for="regionSel">Config region</label>
-            <select id="regionSel">
-                <option value="addRegion">Add region</option>
-                <option value="getAll">Get all</option>
-            </select>
-        </div>
-
-        <div class="locality align">
-            <label for="loc">Config locality</label>
-            <select id="locl">
-                <option value="addLocality">Add locality</option>
-                <option value="getAll">Get all</option>
-            </select>
-        </div>
-
-        <div class="location align">
-            <label for="loc">Config location</label>
-            <select id="loc">
-                <option value="addLocation">Add location</option>
-                <option value="getAll">Get all</option>
-            </select>
-        </div>
-
-        <div class="district align">
-            <div id="distrNameCont">
-                <label for="distrName">District name</label>
-                <input type="text" id="distrName">
+        <form>
+            <div class="district align add">
+                <div id="distrNameCont">
+                    <label for="distrName">District name</label>
+                    <input type="text" id="distrName">
+                </div>
             </div>
-            <div class="align">
-                <button onclick="">Add district</button>
+            <div class="district align add">
+                <button onclick="saveDistrict()">Add district</button>
             </div>
-        </div>
+        </form>
 
-        <div class="district align" id="getAllDistr">
+        <div class="district align getAll" id="getAllDistr">
             <table id="distrTable">
-
+                <tr>
+                    <td>Id</td>
+                    <td>Name</td>
+                    <td>Delete</td>
+                </tr>
             </table>
         </div>
 

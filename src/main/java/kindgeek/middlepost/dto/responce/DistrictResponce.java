@@ -15,15 +15,9 @@ public class DistrictResponce {
 
     private String districtName;
 
-    private List<RegionResponce> regions;
-
     public DistrictResponce(District district){
         this.id = district.getId();
         this.districtName = district.getDistrictName();
-        this.regions = district.getRegions()
-                .stream()
-                .map(RegionResponce::new)
-                .collect(Collectors.toList());
     }
 
 }
