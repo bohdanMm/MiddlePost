@@ -1,6 +1,7 @@
 package kindgeek.middlepost.dto.responce;
 
 import kindgeek.middlepost.entityes.District;
+import kindgeek.middlepost.entityes.Region;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,9 +16,12 @@ public class DistrictResponce {
 
     private String districtName;
 
+    private List<RegionResponce> regions;
+
     public DistrictResponce(District district){
         this.id = district.getId();
         this.districtName = district.getDistrictName();
+        this.regions = district.getRegions().stream().map(RegionResponce::new).collect(Collectors.toList());
     }
 
 }

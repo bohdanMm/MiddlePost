@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -24,6 +25,9 @@ public class RegionService {
 
     @Autowired
     private RegionRepository regionRepository;
+
+    @Autowired
+    private DistrictRepository districtRepository;
 
     @Autowired
     private DistrictService districtService;
@@ -44,7 +48,7 @@ public class RegionService {
         } else {
             regionPage = regionRepository.findAll(pageRequest);
         }
-        return new DataResponce<RegionResponce>(regionPage.getContent()
+        return new DataResponce<>(regionPage.getContent()
                 .stream()
                 .map(RegionResponce::new)
                 .collect(Collectors.toList())
@@ -55,24 +59,26 @@ public class RegionService {
         return new RegionResponce(getRegionEntityByID(id));
     }
 
-    public void save(RegionRequest regionRequest){
+    public RegionResponce save(RegionRequest regionRequest){
         Region region = new Region();
         region.setRegionName(regionRequest.getRegionName());
-        region.setDistrict(districtService.getDistrictEntityById(regionRequest.getDistrictId()));
+        region.setDistrict(districtRepository.findByDistrictName(regionRequest.getDistrictName()));
         regionRepository.save(region);
+        return new RegionResponce(region);
     }
 
     public void update(Long id, RegionRequest regionRequest){
         Region region = getRegionEntityByID(id);
         region.setRegionName(regionRequest.getRegionName());
-        region.setDistrict(districtService.getDistrictEntityById(regionRequest.getDistrictId()));
+        region.setDistrict(districtRepository.findByDistrictName(regionRequest.getDistrictName()));
         regionRepository.save(region);
     }
 
-    public void delete(Long id){
+    public Boolean delete(Long id){
         Region region = getRegionEntityByID(id);
         if(region.getLocalities().isEmpty()){
             regionRepository.delete(region);
+            return true;
         } else {
             throw new WrongInputDataExeption("Region with id:" + id + " has localities");
         }

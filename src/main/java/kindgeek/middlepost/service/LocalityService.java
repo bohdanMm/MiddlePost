@@ -10,6 +10,7 @@ import kindgeek.middlepost.entityes.Locality;
 import kindgeek.middlepost.exeptions.WrongInputDataExeption;
 import kindgeek.middlepost.repository.DistrictRepository;
 import kindgeek.middlepost.repository.LocalityRepository;
+import kindgeek.middlepost.repository.RegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,10 +27,10 @@ public class LocalityService {
     private LocalityRepository localityRepository;
 
     @Autowired
-    private DistrictService districtService;
+    private DistrictRepository districtRepository;
 
     @Autowired
-    private RegionService regionService;
+    private RegionRepository regionRepository;
 
     public Locality getLocalityEntityById(Long id){
         return localityRepository.findById(id)
@@ -55,16 +56,16 @@ public class LocalityService {
     public void save(LocalityRequest localityRequest){
         Locality locality = new Locality();
         locality.setLocalityName(localityRequest.getLocalityName());
-        locality.setRegion(regionService.getRegionEntityByID(localityRequest.getRegionId()));
-        locality.setDistrict(districtService.getDistrictEntityById(localityRequest.getDistrictId()));
+        locality.setRegion(regionRepository.findByRegionName(localityRequest.getRegionName()));
+        locality.setDistrict(districtRepository.findByDistrictName(localityRequest.getDistrictName()));
         localityRepository.save(locality);
     }
 
     public void update(Long id, LocalityRequest localityRequest){
         Locality locality = getLocalityEntityById(id);
         locality.setLocalityName(localityRequest.getLocalityName());
-        locality.setRegion(regionService.getRegionEntityByID(localityRequest.getRegionId()));
-        locality.setDistrict(districtService.getDistrictEntityById(localityRequest.getDistrictId()));
+        locality.setRegion(regionRepository.findByRegionName(localityRequest.getRegionName()));
+        locality.setDistrict(districtRepository.findByDistrictName(localityRequest.getDistrictName()));
         localityRepository.save(locality);
     }
 

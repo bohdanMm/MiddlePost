@@ -1,5 +1,6 @@
 package kindgeek.middlepost.repository;
 
+import kindgeek.middlepost.dto.responce.RegionResponce;
 import kindgeek.middlepost.entityes.Region;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,8 +12,8 @@ import java.util.List;
 @Repository
 public interface RegionRepository extends JpaRepository<Region, Long> {
 
-    List<Region> findAllByDistrict_DistrictName(String DistrictName);
-
     Page<Region> findAllByRegionNameLike(String regionNameLike, PageRequest pageRequest);
+
+    Region findByRegionName(String name);
 
 }

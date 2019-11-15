@@ -60,6 +60,79 @@
         </div>
 
 
+        <form>
+            <div class="region align add">
+                <div>
+                    <label for="distrSelect">District</label>
+                    <select class="distrSelect" id="refionDistrSel">
+
+                    </select>
+                </div>
+            </div>
+            <div class="region align add">
+                <div>
+                    <label for="regionName">Region name</label>
+                    <input type="text" id="regionName">
+                </div>
+            </div>
+
+            <div class="region align add">
+                <button onclick="saveRegion()">Add region</button>
+            </div>
+        </form>
+
+        <div class="region align getAll" id="getAllRegions">
+            <table id="regionTable">
+                <tr>
+                    <td>Id</td>
+                    <td>Name</td>
+                    <td>District</td>
+                    <td>Delete</td>
+                </tr>
+            </table>
+        </div>
+
+
+        <form>
+            <div class="locality align add">
+                <div>
+                    <label for="distrSelect">District</label>
+                    <select class="distrSelect" id="localityDistrSel">
+
+                    </select>
+                </div>
+            </div>
+            <div class="locality align add">
+                <div>
+                    <label for="regionName">Region</label>
+                    <select id="localityRegionSel"></select>
+                </div>
+            </div>
+            <div class="locality align add">
+                <div>
+                    <label for="localityName">Locality name</label>
+                    <input type="text" id="localityName">
+                </div>
+            </div>
+
+            <div class="locality align add">
+                <button onclick="saveRegion()">Add locality</button>
+            </div>
+        </form>
+
+        <div class="locality align getAll" id="getAllRegions">
+            <table id="regionTable">
+                <tr>
+                    <td>Id</td>
+                    <td>Name</td>
+                    <td>District</td>
+                    <td>Region</td>
+                    <td>Delete</td>
+                </tr>
+            </table>
+        </div>
+
+
         <!-- <div class="addNewLocationHolder" id="addLocation" class="holder" class="location">
             <p>
                 Add new location:
@@ -82,5 +155,4 @@
 </body>
 <script src="../scripts/showUserInHeader.js"></script>
 <script src="../scripts/admin.js"></script>
-
 </html>

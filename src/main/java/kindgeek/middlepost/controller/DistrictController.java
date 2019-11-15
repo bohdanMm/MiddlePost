@@ -32,6 +32,11 @@ public class DistrictController {
         return districtService.getById(id);
     }
 
+    @GetMapping("/byName")
+    public DistrictResponce getByName(@RequestParam String name){
+        return districtService.getByDistrictName(name);
+    }
+
     @PostMapping
     public DistrictResponce save(@RequestBody DistrictRequest districtRequest){
         return districtService.save(districtRequest);

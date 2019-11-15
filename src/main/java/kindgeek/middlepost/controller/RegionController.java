@@ -31,8 +31,8 @@ public class RegionController {
     }
 
     @PostMapping
-    public void save(@RequestBody RegionRequest regionRequest){
-        regionService.save(regionRequest);
+    public RegionResponce save(@RequestBody RegionRequest regionRequest){
+        return regionService.save(regionRequest);
     }
 
     @PutMapping("/{id}")
@@ -41,8 +41,8 @@ public class RegionController {
     }
 
     @DeleteMapping
-    public void delete(@RequestParam Long id){
-        regionService.delete(id);
+    public Boolean delete(@RequestParam Long id){
+        return regionService.delete(id);
     }
 
 }

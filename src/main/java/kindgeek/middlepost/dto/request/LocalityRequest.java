@@ -14,8 +14,8 @@ public class LocalityRequest {
     private String localityName;
 
     @NotBlank
-    private Long districtId;
+    private String districtName;
 
     @NotBlank
-    private Long regionId;
+    private String regionName;
 }

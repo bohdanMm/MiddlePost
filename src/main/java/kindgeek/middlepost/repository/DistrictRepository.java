@@ -18,4 +18,5 @@ public interface DistrictRepository extends JpaRepository<District, Long> {
 
     Page<District> findAllByDistrictNameLike(String name, Pageable pageable);
 
+
 }

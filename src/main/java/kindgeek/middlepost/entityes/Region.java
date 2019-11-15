@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 public class Region extends IdHolder {
 
-    private String RegionName;
+    private String regionName;
 
     @ManyToOne
     private District district;

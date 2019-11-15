@@ -15,6 +15,6 @@ public class RegionRequest {
     private String regionName;
 
     @NotBlank
-    private Long districtId;
+    private String districtName;
 
 }
