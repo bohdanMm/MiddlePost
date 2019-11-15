@@ -30,8 +30,8 @@ public class LocalityController {
     }
 
     @PostMapping
-    public void save(@RequestBody LocalityRequest localityRequest){
-        localityService.save(localityRequest);
+    public LocalityResponce save(@RequestBody LocalityRequest localityRequest){
+        return localityService.save(localityRequest);
     }
 
     @PutMapping("/{id}")
@@ -40,8 +40,8 @@ public class LocalityController {
     }
 
     @DeleteMapping
-    public void delete(@RequestParam Long id){
-        localityService.delete(id);
+    public Boolean delete(@RequestParam Long id){
+        return localityService.delete(id);
     }
 
 }

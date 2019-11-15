@@ -53,12 +53,13 @@ public class LocalityService {
                 , localityPage);
     }
 
-    public void save(LocalityRequest localityRequest){
+    public LocalityResponce save(LocalityRequest localityRequest){
         Locality locality = new Locality();
         locality.setLocalityName(localityRequest.getLocalityName());
         locality.setRegion(regionRepository.findByRegionName(localityRequest.getRegionName()));
         locality.setDistrict(districtRepository.findByDistrictName(localityRequest.getDistrictName()));
         localityRepository.save(locality);
+        return new LocalityResponce(locality);
     }
 
     public void update(Long id, LocalityRequest localityRequest){
@@ -69,10 +70,11 @@ public class LocalityService {
         localityRepository.save(locality);
     }
 
-    public void delete(Long id){
+    public Boolean delete(Long id){
         Locality locality = getLocalityEntityById(id);
         if(locality.getAdress().isEmpty()){
             localityRepository.delete(locality);
+            return true;
         } else {
             throw new WrongInputDataExeption("There are locations in this locality");
         }

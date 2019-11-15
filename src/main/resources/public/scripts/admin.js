@@ -1,6 +1,7 @@
 var basicURL = "http://localhost:8080";
 var distrPage = 0;
 var regionPage = 0;
+var localityPage =0;
 
 document.addEventListener('DOMContentLoaded', showUserInHeader);
 document.addEventListener('DOMContentLoaded', setElemVisability);
@@ -9,6 +10,9 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 document.addEventListener('DOMContentLoaded', function () {
     getRegionTable(regionPage);
+});
+document.addEventListener('DOMContentLoaded', function () {
+    getLocalityesTable(localityPage);
 });
 
 document.getElementById("itemToConfigure").addEventListener('change', setElemVisability);
@@ -114,7 +118,7 @@ function getDistTable(page) {
             }
         })
         .fail(function (e) {
-            alert("Error in load brand. " + e.responseJSON.message)
+            alert("Error in load districts. " + e.responseJSON.message)
         })
 }
 
@@ -190,7 +194,7 @@ function getRegionTable(page) {
             }
         })
         .fail(function (e) {
-            alert("Error in load brand. " + e.responseJSON.message)
+            alert("Error in load regions. " + e.responseJSON.message)
         })
 }
 
@@ -234,7 +238,7 @@ function getDistrictsForSelect() {
             }
         })
         .fail(function (e) {
-            alert("Error in load brand. " + e.responseJSON.message)
+            alert("Error in load districts. " + e.responseJSON.message)
         })
 }
 
@@ -258,32 +262,33 @@ function getRegionForLocalitySelect() {
             }
         })
         .fail(function (e) {
-            alert("Error in load brand. " + e.responseJSON.message)
+            alert("Error in load regions. " + e.responseJSON.message)
         })
 }
 
 function saveLocality() {
     event.preventDefault();
     var localityForSave = {
-        regionName: $("#regionName").val(),
-        districtName: $('#refionDistrSel').val(),
+        regionName: $("#localityRegionSel").val(),
+        districtName: $('#localityDistrSel').val(),
         localityName: $('#localityName').val()
     };
 
     $.ajax({
-        url: basicURL + "/region",
+        url: basicURL + "/locality",
         type: "POST",
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(localityForSave)
     })
         .done(function (data) {
-            // var table = document.getElementById("regionTable");
-            // for (var i = table.rows.length - 1; i > 0; i--) {
-            //     table.deleteRow(i);
-            // }
-            // regionPage = 0;
-            // getRegionTable(distrPage);
+            console.log(data);
+            var table = document.getElementById("loclaitiesTable");
+            for (var i = table.rows.length - 1; i > 0; i--) {
+                table.deleteRow(i);
+            }
+            localityPage = 0;
+            getLocalityesTable(localityPage);
         })
         .fail(function (e) {
             alert("ERROR:\n" + e.responseJSON.errors[0].defaultMessage);
@@ -291,29 +296,49 @@ function saveLocality() {
 }
 
 function getLocalityesTable(page) {
-    var url = basicURL + "/region?page= " + page + "&size=20&sortBy=regionName&direction=ASC";
+    var url = basicURL + "/locality?page= " + page + "&size=20&sortBy=localityName&direction=ASC";
     $.ajax({
         url: url,
         type: "GET",
         dataType: "json"
     })
         .done(function (response) {
-            var regions = response.data;
-            var table = document.getElementById("regionTable");
-            for (var i = 0; i < regions.length; i++) {
+            var localities = response.data;
+            var table = document.getElementById("loclaitiesTable");
+            for (var i = 0; i < localities.length; i++) {
                 var row = table.insertRow();
-                var region = regions[i];
+                var locality = localities[i];
                 for (var j = 0; j < table.rows[0].cells.length + 1; j++) {
                     row.insertCell();
                 };
-                table.rows[table.rows.length - 1].cells[0].innerHTML = region.id;
-                table.rows[table.rows.length - 1].cells[1].innerHTML = region.regionName;
-                table.rows[table.rows.length - 1].cells[2].innerHTML = region.districtName;
-                table.rows[table.rows.length - 1].cells[3].innerHTML = '<button onclick="deleteRegion(' + region.id + ')">X</button>';
+                table.rows[table.rows.length - 1].cells[0].innerHTML = locality.id;
+                table.rows[table.rows.length - 1].cells[1].innerHTML = locality.localityName;
+                table.rows[table.rows.length - 1].cells[2].innerHTML = locality.districtName;
+                table.rows[table.rows.length - 1].cells[3].innerHTML = locality.regionName;
+                table.rows[table.rows.length - 1].cells[4].innerHTML = '<button onclick="deleteLocality(' + locality.id + ')">X</button>';
 
             }
         })
         .fail(function (e) {
-            alert("Error in load brand. " + e.responseJSON.message)
+            alert("Error in load localityes. " + e.responseJSON.message)
+        })
+}
+
+function deleteLocality(id) {
+    $.ajax({
+        url: basicURL + "/locality?id=" + id,
+        type: "DELETE",
+        dataType: "json"
+    })
+        .done(function (data) {
+            var table = document.getElementById("loclaitiesTable");
+            for (var i = table.rows.length - 1; i > 0; i--) {
+                table.deleteRow(i);
+            }
+            localityPage = 0;
+            getLocalityesTable(localityPage);
+        })
+        .fail(function (e) {
+            alert("ERROR:\n" + e.responseJSON.message);
         })
 }
