@@ -49,7 +49,7 @@ public class WorkerService {
         return new WorkerResponce(getWorkerEntityById(id));
     }
 
-    public void save(WorkerRequest workerRequest){
+    public WorkerResponce save(WorkerRequest workerRequest){
         Worker worker = new Worker();
         worker.setName(workerRequest.getName());
         worker.setSurname(workerRequest.getSurname());
@@ -57,9 +57,10 @@ public class WorkerService {
         worker.setPosition(workerRequest.getPosition());
         worker.setLocation(locationService.getLocationEntityById(workerRequest.getLocationId()));
         workerRepository.save(worker);
+        return new WorkerResponce(worker);
     }
 
-    public void update(Long id, WorkerRequest workerRequest){
+    public WorkerResponce update(Long id, WorkerRequest workerRequest){
         Worker worker = getWorkerEntityById(id);
         worker.setName(workerRequest.getName());
         worker.setSurname(workerRequest.getSurname());
@@ -67,10 +68,12 @@ public class WorkerService {
         worker.setPosition(workerRequest.getPosition());
         worker.setLocation(locationService.getLocationEntityById(workerRequest.getLocationId()));
         workerRepository.save(worker);
+        return new WorkerResponce(worker);
     }
 
-    public void delete(Long id){
+    public Boolean delete(Long id){
         workerRepository.delete(getWorkerEntityById(id));
+        return true;
     }
 
     public List<WorkerResponce> priceFilter(FilterWorkerRequest filterWorkerRequest){

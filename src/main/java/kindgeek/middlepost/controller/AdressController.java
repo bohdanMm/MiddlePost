@@ -28,18 +28,18 @@ public class AdressController {
     }
 
     @PostMapping
-    public void save(@RequestBody AdressRequest adressRequest){
-        adressService.save(adressRequest);
+    public AdressResponce save(@RequestBody AdressRequest adressRequest){
+        return adressService.save(adressRequest);
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable Long id, @RequestBody AdressRequest adressRequest){
-        adressService.update(id, adressRequest);
+    public AdressResponce update(@PathVariable Long id, @RequestBody AdressRequest adressRequest){
+        return adressService.update(id, adressRequest);
     }
 
     @DeleteMapping
-    public void delete(@RequestParam Long id){
-        adressService.delete(id);
+    public Boolean delete(@RequestParam Long id){
+        return adressService.delete(id);
     }
 
 }

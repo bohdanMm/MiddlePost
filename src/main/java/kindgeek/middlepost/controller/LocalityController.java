@@ -35,8 +35,8 @@ public class LocalityController {
     }
 
     @PutMapping("/{id}")
-    public  void update(@PathVariable Long id, @RequestBody LocalityRequest localityRequest){
-        localityService.update(id, localityRequest);
+    public  LocalityResponce update(@PathVariable Long id, @RequestBody LocalityRequest localityRequest){
+        return localityService.update(id, localityRequest);
     }
 
     @DeleteMapping

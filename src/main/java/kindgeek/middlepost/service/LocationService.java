@@ -40,22 +40,25 @@ public class LocationService {
         return new LocationResponce(getLocationEntityById(id));
     }
 
-    public void save(LocationRequest locationRequest){
+    public LocationResponce save(LocationRequest locationRequest){
         Location location = new Location();
         location.setAdress(adressService.getAdressEntityById(locationRequest.getAdressId()));
         locationRepository.save(location);
+        return new LocationResponce(location);
     }
 
-    public void update(Long id, LocationRequest locationRequest){
+    public LocationResponce update(Long id, LocationRequest locationRequest){
         Location location = getLocationEntityById(id);
         location.setAdress(adressService.getAdressEntityById(locationRequest.getAdressId()));
         locationRepository.save(location);
+        return new LocationResponce(location);
     }
 
-    public void delete(Long id){
+    public Boolean delete(Long id){
         Location location = getLocationEntityById(id);
         if(location.getWorker().isEmpty()) {
             locationRepository.delete(location);
+            return true;
         } else {
             throw new WrongInputDataExeption("Location with id:" + id + " contains workers.");
         }

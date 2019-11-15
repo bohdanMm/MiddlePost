@@ -62,12 +62,13 @@ public class LocalityService {
         return new LocalityResponce(locality);
     }
 
-    public void update(Long id, LocalityRequest localityRequest){
+    public LocalityResponce update(Long id, LocalityRequest localityRequest){
         Locality locality = getLocalityEntityById(id);
         locality.setLocalityName(localityRequest.getLocalityName());
         locality.setRegion(regionRepository.findByRegionName(localityRequest.getRegionName()));
         locality.setDistrict(districtRepository.findByDistrictName(localityRequest.getDistrictName()));
         localityRepository.save(locality);
+        return new LocalityResponce(locality);
     }
 
     public Boolean delete(Long id){

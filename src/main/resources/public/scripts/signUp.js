@@ -7,15 +7,12 @@ document.getElementById('icon').addEventListener('click', function () {
 function validate() {
     var pass = document.forms["registrationForm"]["pass"];
     var passConf = document.forms["registrationForm"]["confirmPass"];
-    console.log(pass, passConf);
     if (pass.value != passConf.value) {
         alert("Passwords do not mutch!");
         pass.value ="";
         passConf.value ="";
         return false;
     }
-
-    console.log("Save Brand.");
     event.preventDefault();
 
     var customerForSave = {
@@ -36,13 +33,10 @@ function validate() {
         data: JSON.stringify(customerForSave)
     })
         .done(function (response) {
-            alert(JSON.stringify(response));
             sessionStorage.setItem('currentCustomer', JSON.stringify(response));
             window.location.href = '../index.html';
         })
         .fail(function (e) {
-            console.log(errors);
-            alert(JSON.parse(sessionStorage.getItem('currentCustomer')).name);
             sessionStorage.clear();
             alert("ERROR:\n" + e.responseJSON.errors[0].defaultMessage);
         });

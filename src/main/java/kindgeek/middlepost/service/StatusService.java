@@ -39,22 +39,25 @@ public class StatusService {
         return statusRepository.findByStatusName(statusName);
     }
 
-    public void save(StatusRequest statusRequest){
+    public StatusResponce save(StatusRequest statusRequest){
         Status status = new Status();
         status.setStatusName(statusRequest.getStatusName());
         statusRepository.save(status);
+        return new StatusResponce(status);
     }
 
-    public void update(Long id, StatusRequest statusRequest){
+    public StatusResponce update(Long id, StatusRequest statusRequest){
         Status status = getStatusEntity(id);
         status.setStatusName(statusRequest.getStatusName());
         statusRepository.save(status);
+        return new StatusResponce(status);
     }
 
-    public void delete(Long id) {
+    public Boolean delete(Long id) {
         Status status = getStatusEntity(id);
         if(status.getPackageList().isEmpty()) {
             statusRepository.delete(status);
+            return true;
         } else {
             throw new WrongInputDataExeption("Status with id: " + id +" has some packages.");
         }

@@ -63,7 +63,7 @@ public class PackageService {
         return new PackageResponce(getPackacgeEntityById(id));
     }
 
-    public void save(PackageRequest packageRequest){
+    public PackageResponce save(PackageRequest packageRequest){
         Package pac = new Package();
         pac.setCustomerTo(customerService.getCustomerEntityById(packageRequest.getCustomerToId()));
         pac.setCustomerFrom(customerService.getCustomerEntityById(packageRequest.getCustomerFromId()));
@@ -73,9 +73,10 @@ public class PackageService {
         pac.setWeight(packageRequest.getWeight());
         pac.setStatus(statusService.getStatusEntityById(packageRequest.getStatusId()));
         packageRepository.save(pac);
+        return new PackageResponce(pac);
     }
 
-    public void update(Long id, PackageRequest packageRequest){
+    public PackageResponce update(Long id, PackageRequest packageRequest){
         Package pac = getPackacgeEntityById(id);
         pac.setCustomerTo(customerService.getCustomerEntityById(packageRequest.getCustomerToId()));
         pac.setCustomerFrom(customerService.getCustomerEntityById(packageRequest.getCustomerFromId()));
@@ -85,9 +86,11 @@ public class PackageService {
         pac.setWeight(packageRequest.getWeight());
         pac.setStatus(statusService.getStatusEntityById(packageRequest.getStatusId()));
         packageRepository.save(pac);
+        return new PackageResponce(pac);
     }
 
-    public void delete(Long id){
+    public Boolean delete(Long id){
         packageRepository.delete(getPackacgeEntityById(id));
+        return true;
     }
 }

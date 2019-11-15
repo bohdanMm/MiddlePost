@@ -67,11 +67,12 @@ public class RegionService {
         return new RegionResponce(region);
     }
 
-    public void update(Long id, RegionRequest regionRequest){
+    public RegionResponce update(Long id, RegionRequest regionRequest){
         Region region = getRegionEntityByID(id);
         region.setRegionName(regionRequest.getRegionName());
         region.setDistrict(districtRepository.findByDistrictName(regionRequest.getDistrictName()));
         regionRepository.save(region);
+        return new RegionResponce(region);
     }
 
     public Boolean delete(Long id){

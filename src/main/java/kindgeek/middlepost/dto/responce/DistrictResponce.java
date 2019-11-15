@@ -5,6 +5,7 @@ import kindgeek.middlepost.entityes.Region;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,7 +22,12 @@ public class DistrictResponce {
     public DistrictResponce(District district){
         this.id = district.getId();
         this.districtName = district.getDistrictName();
-        this.regions = district.getRegions().stream().map(RegionResponce::new).collect(Collectors.toList());
+        if (district.getRegions() == null) {
+            this.regions = new ArrayList<>();
+        }
+        else {
+            this.regions = district.getRegions().stream().map(RegionResponce::new).collect(Collectors.toList());
+        }
     }
 
 }

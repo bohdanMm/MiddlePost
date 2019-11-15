@@ -27,18 +27,18 @@ public class StatusController {
     }
 
     @PostMapping
-    public void save(@RequestBody StatusRequest statusRequest){
-        statusService.save(statusRequest);
+    public StatusResponce save(@RequestBody StatusRequest statusRequest){
+        return statusService.save(statusRequest);
     }
 
     @PutMapping("/{id}")
-    public  void update(@PathVariable Long id, @RequestBody StatusRequest statusRequest){
-        statusService.update(id, statusRequest);
+    public  StatusResponce update(@PathVariable Long id, @RequestBody StatusRequest statusRequest){
+        return statusService.update(id, statusRequest);
     }
 
     @DeleteMapping
-    public void  delete(@RequestParam Long id){
-        statusService.delete(id);
+    public Boolean delete(@RequestParam Long id){
+        return statusService.delete(id);
     }
 
 

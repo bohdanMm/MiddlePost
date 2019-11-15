@@ -36,18 +36,18 @@ public class PackageController {
     }
 
     @PostMapping
-    public void save(@RequestBody PackageRequest packageRequest){
-        packageService.save(packageRequest);
+    public PackageResponce save(@RequestBody PackageRequest packageRequest){
+        return packageService.save(packageRequest);
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable Long id ,@RequestBody PackageRequest packageRequest){
-        packageService.update(id, packageRequest);
+    public PackageResponce update(@PathVariable Long id ,@RequestBody PackageRequest packageRequest){
+        return packageService.update(id, packageRequest);
     }
 
     @DeleteMapping
-    public void delete(@RequestParam Long id){
-        packageService.delete(id);
+    public Boolean delete(@RequestParam Long id){
+        return packageService.delete(id);
     }
 
 }

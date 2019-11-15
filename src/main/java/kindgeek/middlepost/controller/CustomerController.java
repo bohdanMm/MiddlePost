@@ -38,13 +38,13 @@ public class CustomerController {
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable Long id, @RequestBody CustomerRequest customerRequest){
-        customerService.update(id, customerRequest);
+    public CustomerResponce update(@PathVariable Long id, @RequestBody CustomerRequest customerRequest){
+        return customerService.update(id, customerRequest);
     }
 
     @DeleteMapping
-    public void delete(@RequestParam Long id){
-        customerService.delete(id);
+    public Boolean delete(@RequestParam Long id){
+        return customerService.delete(id);
     }
 
     @PostMapping("/logIn")

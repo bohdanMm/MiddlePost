@@ -59,13 +59,15 @@ public class DistrictService {
         District district = new District();
         district.setDistrictName(districtRequest.getDistrictName());
         districtRepository.save(district);
-        return new DistrictResponce(district);
+        DistrictResponce districtResponce = new DistrictResponce(district);
+        return districtResponce;
     }
 
-    public void update(Long id, DistrictRequest districtRequest){
+    public DistrictResponce update(Long id, DistrictRequest districtRequest){
         District district = getDistrictEntityById(id);
         district.setDistrictName(districtRequest.getDistrictName());
         districtRepository.save(district);
+        return new DistrictResponce(district);
     }
 
     public Boolean delete(Long id){

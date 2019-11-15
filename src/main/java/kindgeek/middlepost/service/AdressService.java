@@ -52,12 +52,13 @@ public class AdressService {
         return new AdressResponce(adress);
     }
 
-    public void update(Long id, AdressRequest adressRequest){
+    public AdressResponce update(Long id, AdressRequest adressRequest){
         Adress adress = getAdressEntityById(id);
         adress.setStreet(adressRequest.getStreet());
         adress.setBuildingNumber(adressRequest.getBuildingNumber());
         adress.setLocality(localityService.getLocalityEntityById(adressRequest.getLocalityId()));
         adressRepository.save(adress);
+        return new AdressResponce(adress);
     }
 
     public Boolean delete(Long id){

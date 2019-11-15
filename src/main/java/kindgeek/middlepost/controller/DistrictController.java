@@ -43,8 +43,8 @@ public class DistrictController {
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable Long id, @RequestBody DistrictRequest districtRequest){
-        districtService.update(id, districtRequest);
+    public DistrictResponce update(@PathVariable Long id, @RequestBody DistrictRequest districtRequest){
+        return districtService.update(id, districtRequest);
     }
 
     @DeleteMapping

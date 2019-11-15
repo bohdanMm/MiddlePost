@@ -29,18 +29,18 @@ public class WorkerController {
     }
 
     @PostMapping
-    public void save(@RequestBody WorkerRequest workerRequest){
-        workerController.save(workerRequest);
+    public WorkerResponce save(@RequestBody WorkerRequest workerRequest){
+        return workerController.save(workerRequest);
     }
 
     @PutMapping
-    public void update(@PathVariable Long id ,@RequestBody WorkerRequest workerRequest){
-        workerController.update(id, workerRequest);
+    public WorkerResponce update(@PathVariable Long id ,@RequestBody WorkerRequest workerRequest){
+        return workerController.update(id, workerRequest);
     }
 
     @DeleteMapping
-    public void delete(@RequestParam Long id){
-        workerController.delete(id);
+    public Boolean delete(@RequestParam Long id){
+        return workerController.delete(id);
     }
 
 }

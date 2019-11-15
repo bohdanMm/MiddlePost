@@ -56,7 +56,7 @@ public class CustomerService {
         return new CustomerLogedInResponce(customer);
     }
 
-    public void update(Long id, CustomerRequest customerRequest){
+    public CustomerResponce update(Long id, CustomerRequest customerRequest){
         Customer customer = getCustomerEntityById(id);
         customer.setName(customerRequest.getName());
         customer.setSurname(customerRequest.getSurname());
@@ -65,15 +65,13 @@ public class CustomerService {
         customer.setPassword(customerRequest.getPassword());
         customer.setEmail(customerRequest.getEmail());
         customerRepository.save(customer);
+        return new CustomerResponce(customer);
     }
 
-    public void delete(Long id){
+    public Boolean delete(Long id){
         Customer customer = getCustomerEntityById(id);
-        if (customer.getPasportData() != null){
-            customerRepository.delete(customer);
-        } else {
-            customerRepository.delete(customer);
-        }
+        customerRepository.delete(customer);
+        return true;
     }
 
     public CustomerLogedInResponce logIn(CustomerLogInRequest request){

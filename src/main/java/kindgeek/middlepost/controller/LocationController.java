@@ -28,18 +28,18 @@ public class LocationController {
     }
 
     @PostMapping
-    public void save(@RequestBody LocationRequest locationRequest){
-        locationService.save(locationRequest);
+    public LocationResponce save(@RequestBody LocationRequest locationRequest){
+        return locationService.save(locationRequest);
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable Long id, @RequestBody LocationRequest locationRequest){
-        locationService.update(id, locationRequest);
+    public LocationResponce update(@PathVariable Long id, @RequestBody LocationRequest locationRequest){
+        return locationService.update(id, locationRequest);
     }
 
     @DeleteMapping
-    public void delete(@RequestParam Long id){
-        locationService.delete(id);
+    public Boolean delete(@RequestParam Long id){
+        return locationService.delete(id);
     }
 
 }
