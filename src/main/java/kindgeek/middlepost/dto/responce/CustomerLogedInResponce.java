@@ -16,7 +16,10 @@ public class CustomerLogedInResponce {
 
     private String status;
 
+    private Long id;
+
     public CustomerLogedInResponce(Customer customer) {
+        this.id = customer.getId();
         this.name = customer.getName();
         this.surname = customer.getSurname();
         this.email = customer.getEmail();

@@ -19,7 +19,6 @@ function checkLogIn() {
         pageHref.href = href;
         pageHref.className = "refs";
         pageHref.innerHTML = JSON.parse(sessionStorage.getItem('currentCustomer')).name;
-        console.log(pageHref);
         var refrences =  document.getElementById('references');
         refrences.appendChild(pageHref);
         var exit = document.createElement("a");
@@ -33,5 +32,5 @@ function checkLogIn() {
 
 function logOut(){
     sessionStorage.clear();
-    window.location.href = '../index.html';
+    window.location.href = 'index.html';
 }

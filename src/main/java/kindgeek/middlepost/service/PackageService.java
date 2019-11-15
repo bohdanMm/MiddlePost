@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -40,6 +41,18 @@ public class PackageService {
     public DataResponce<PackageResponce> getAll(Integer page, Integer size){
         PageRequest pageRequest = PageRequest.of(page, size);
         Page<Package> packagePage = packageRepository.findAll(pageRequest);
+        return new DataResponce<>(packagePage.getContent().stream()
+                .map(PackageResponce::new)
+                .collect(Collectors.toList()),
+                packagePage);
+    }
+
+    public DataResponce<PackageResponce> getAllByUserId(Integer page, Integer size,
+                                                String sortBy, Sort.Direction direction,
+                                                Long userId){
+        Sort sort = Sort.by(direction, sortBy);
+        PageRequest pageRequest = PageRequest.of(page, size, sort);
+        Page<Package> packagePage = packageRepository.findAllByCustomerFrom_IdOrCustomerTo_Id(userId, userId, pageRequest);
         return new DataResponce<>(packagePage.getContent().stream()
                 .map(PackageResponce::new)
                 .collect(Collectors.toList()),

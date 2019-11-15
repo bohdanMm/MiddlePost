@@ -1,7 +1,7 @@
 var basicURL = "http://localhost:8080";
 var distrPage = 0;
 var regionPage = 0;
-var localityPage =0;
+var localityPage = 0;
 
 document.addEventListener('DOMContentLoaded', showUserInHeader);
 document.addEventListener('DOMContentLoaded', setElemVisability);
@@ -74,6 +74,7 @@ function saveDistrict() {
     var districtForSave = {
         districtName: $('#distrName').val(),
     };
+    document.getElementById("distrName").value = "";
 
     $.ajax({
         url: basicURL + "/district",
@@ -148,6 +149,7 @@ function saveRegion() {
         regionName: $("#regionName").val(),
         districtName: $('#refionDistrSel').val()
     };
+    document.getElementById("regionName").value = "";
 
     $.ajax({
         url: basicURL + "/region",
@@ -170,7 +172,6 @@ function saveRegion() {
 }
 
 function getRegionTable(page) {
-    console.log(page);
     var url = basicURL + "/region?page= " + page + "&size=20&sortBy=regionName&direction=ASC";
     $.ajax({
         url: url,
@@ -253,6 +254,9 @@ function getRegionForLocalitySelect() {
         .done(function (response) {
             var regions = response.regions;
             var regionSelect = document.getElementById('localityRegionSel');
+            for (i = regionSelect.options.length - 1; i >= 0; i--) {
+                regionSelect.remove(i);
+            }
             for (var i = 0; i < regions.length; i++) {
                 var region = regions[i];
                 var opt = document.createElement('option');
@@ -282,7 +286,6 @@ function saveLocality() {
         data: JSON.stringify(localityForSave)
     })
         .done(function (data) {
-            console.log(data);
             var table = document.getElementById("loclaitiesTable");
             for (var i = table.rows.length - 1; i > 0; i--) {
                 table.deleteRow(i);

@@ -7,15 +7,22 @@ document.getElementById('icon').addEventListener('click', function () {
     window.location.href = '../index.html';
 });
 
+document.getElementById('selecStortBy').addEventListener('change', getPackagesData);
+document.getElementById('order').addEventListener('change', getPackagesData);
+
 function getPackagesData() {
     var table = document.getElementById("usersHistoryTable");
-
     $.ajax({
-        url: basicURL + "/package?page=0&size=100&",
+        url: basicURL + "/package/byUser?page=0&size=100&sortBy=" + document.getElementById("selecStortBy").value
+        + "&direction="+ document.getElementById('order').value
+        +"&id=" + JSON.parse(sessionStorage.getItem('currentCustomer')).id,
         type: "GET",
         dataType: "json"
     })
         .done(function (response) {
+            for (var i = table.rows.length - 1; i > 0; i--) {
+                table.deleteRow(i);
+            }
             var packages = response.data;
             for (var i = 0; i < packages.length; i++) {
                 var row = table.insertRow();

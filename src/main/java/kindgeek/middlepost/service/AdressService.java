@@ -43,12 +43,13 @@ public class AdressService {
         return new AdressResponce(getAdressEntityById(id));
     }
 
-    public void save(AdressRequest adressRequest){
+    public AdressResponce save(AdressRequest adressRequest){
         Adress adress = new Adress();
         adress.setStreet(adressRequest.getStreet());
         adress.setBuildingNumber(adressRequest.getBuildingNumber());
         adress.setLocality(localityService.getLocalityEntityById(adressRequest.getLocalityId()));
         adressRepository.save(adress);
+        return new AdressResponce(adress);
     }
 
     public void update(Long id, AdressRequest adressRequest){
@@ -59,10 +60,11 @@ public class AdressService {
         adressRepository.save(adress);
     }
 
-    public void delete(Long id){
+    public Boolean delete(Long id){
         Adress adress = getAdressEntityById(id);
         if (adress.getLocation() == null){
              adressRepository.delete(adress);
+             return true;
         } else {
             throw new WrongInputDataExeption("Adress with id: " + id + " is relative to location.");
         }

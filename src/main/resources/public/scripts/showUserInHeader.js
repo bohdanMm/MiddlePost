@@ -17,7 +17,6 @@ function showUserInHeader() {
         pageHref.href = href;
         pageHref.className = "refs";
         pageHref.innerHTML = JSON.parse(sessionStorage.getItem('currentCustomer')).name;
-        console.log(pageHref);
         var refrences =  document.getElementById('references');
         refrences.appendChild(pageHref);
         var exit = document.createElement("a");
